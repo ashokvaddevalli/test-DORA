@@ -11,21 +11,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Ensure there is at least one release
-        run: |
-          RELEASE_COUNT=$(gh release list --limit 1 | wc -l)
-          if [ "$RELEASE_COUNT" -eq 0 ]; then
-            echo "No releases found. Creating initial release..."
-            NEW_TAG="v0.0.$(date +%s)"
-            gh release create "$NEW_TAG" --notes "Auto-generated initial release"
-          else
-            echo "Releases already exist."
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: DevOps Metrics from GitHub
-        uses: stenjo/devops-metrics-action@v1
+        uses: stenjo/devops-metrics-action@v1.3.0
         id: dora
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
