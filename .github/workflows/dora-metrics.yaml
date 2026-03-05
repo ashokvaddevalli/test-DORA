@@ -16,3 +16,7 @@ jobs:
         id: dora
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get the output rate
+        run: echo "The deploy rate was ${{ steps.dora.outputs.deploy-rate }}"
+        #  Use the output from the `dora` step    
